@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTDMapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="katachi.spring.exercise.repository.VocabularyBookMapper">
+
+	<resultMap id="vocabularyBook" type="VocabularyBook">
+		<result property="id" column="id"/>
+		<result property="createdUserId" column="created_user_id"/>
+		<result property="name" column="name"/>
+		<result property="description" column="description"/>
+		<association property="user" resultMap="user"/>	
+	</resultMap>
+	
+	<resultMap id="users" type="Users">
+		<result property="id" column="id"/>
+		<result property="name" column="name"/>	
+		<result property="email" column="email"/>	
+		<result property="password" column="password"/>
+	</resultMap>	
+
+	<insert id="add">
+		INSERT INTO vocabularyBook(
+			created_user_id
+			,name
+			,description
+		)
+		VALUES(
+			#{userId}
+			,#{name}
+			,#{description}
+		)
+	</insert>
+	
+	<select id="count">
+		SELECT
+			count(name)
+		FROM
+			vocabularyBook
+		WHERE
+			name =#{name}
+			AND created_user_id = #{userId}
+	</select>
+	
+	<select id="getAll">
+		SELECT
+			id
+			,created_user_id
+			,name
+			,description
+		FROM 
+			vocabularyBook
+		WHERE
+			created_user_id = #{userId}
+	</select>
+	
+	<select id="getAllBook">
+		SELECT
+			vocabularyBook.id
+			,vocabularyBook.created_user_id
+			,vocabularyBook.name
+			,vocabularyBook.description
+			,LEFT(users.name, 1) AS userName
+		FROM 
+			vocabularyBook
+		LEFT JOIN
+			users
+		ON
+			vocabularyBook.created_user_id = users.id
+	</select>
+	
+	
+		
+	
+</mapper>

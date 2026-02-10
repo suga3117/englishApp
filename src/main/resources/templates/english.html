@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout}">
+<head>
+	<meta charset="UTF-8">
+	<title th:text="#{etan}"></title>
+</head>
+<body>
+	<div layout:fragment="content">
+		<h3 th:text="${newMember}" class="text-danger"></h3>
+		<h3 th:text="${logedIn}" class="text-danger"></h3>
+		<!-- ログアウト状態 -->
+		<div class="d-flex align-items-center gap-2 justify-content-end">
+			<a sec:authorize="isAnonymous()" th:href="@{/login}">ログイン</a>&nbsp;&nbsp;
+			<a sec:authorize="isAnonymous()" th:href="@{/regist}" class="button-spacing">新規登録</a>
+		</div>
+		<!-- ログイン状態 -->
+		<div sec:authorize="isAuthenticated()" class="d-flex align-items-center gap-2 justify-content-end">
+			<a th:href="@{/mypage}" th:text="${'welcome! ' + loginUserName + '様'}"> </a>
+			<form method="post" th:action="@{/logout}">
+				<input type="submit" value="  ログアウト" class="btn btn-link">
+			</form>
+		</div>
+		
+		<h1 th:text="#{etan}"></h1>
+		
+		<br><br>
+	
+		<div class="top-page">
+			<a class="btn btn-primary" th:href="@{/vocabularyBook}">単語帳登録</a>
+			<a class="btn btn-primary" th:href="@{/addition}">英単語登録</a>
+			<a class="btn btn-primary" th:href="@{/cardTop}">フラッシュカード</a>
+			<a class="btn btn-primary" th:href="@{/dictionary}">辞書</a>
+			<a class="btn btn-primary" th:href="@{/book}">みんなの単語帳</a>
+		</div>
+		<br><br>
+		<p>※英単語登録とフラッシュカードの機能はログインユーザーのみ利用可能です。</p>
+		
+		<img class="photo" src="/images/study_english_ondoku.png" alt="english">
+	</div>	
+</body>
+</html>

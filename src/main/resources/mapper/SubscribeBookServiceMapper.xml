@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTDMapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="katachi.spring.exercise.repository.SubscribeBookMapper">
+
+	<resultMap id="subscribeBook" type="SubscribeBook">
+		<result property="id" column="id"/>
+		<result property="userId" column="user_id"/>
+		<result property="bookId" column="book_id"/>
+		<association property="vocabularyBook" resultMap="vocabularyBook"/>	
+	</resultMap>
+	
+	<resultMap id="vocabularyBook" type="VocabularyBook">
+		<result property="id" column="id"/>
+		<result property="createdUserId" column="created_user_id"/>	
+		<result property="name" column="name"/>	
+		<result property="description" column="description"/>
+	</resultMap>
+
+	<insert id="add">
+		INSERT INTO subscribeBook(
+			user_id
+			,book_id
+			,subsribe_date
+		)
+		VALUES(
+			#{userId}
+			,#{bookId}
+			,SYSDATE()
+		)
+	</insert>
+	
+	<select id="count">
+		SELECT
+			count(book_id)
+		FROM
+			subscribeBook
+		WHERE
+			user_id = #{userId}
+			And book_id = #{bookId}
+	</select>
+	
+	<select id="getMine" resultMap="subscribeBook">
+		SELECT
+			vocabularyBook.id
+			,vocabularyBook.created_user_id
+			,vocabularyBook.name
+			,vocabularyBook.description
+			,subscribeBook.id
+			,subscribeBook.user_id
+			,subscribeBook.book_id
+		FROM 
+			subscribeBook
+		LEFT JOIN
+			vocabularyBook
+		ON
+			subscribeBook.book_id = vocabularyBook.id
+		WHERE
+			subscribeBook.user_id = #{userId}
+	</select>
+	
+</mapper>

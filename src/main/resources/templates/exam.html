@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout}">
+<head>
+	<meta charset="UTF-8">
+	<title th:text="#{exam}"></title>
+</head>
+<body>
+	<div layout:fragment="content">
+		
+		<h1 th:text="#{exam}"></h1>
+		<br><br>
+		
+		<form method="post" th:action="@{/exam}" th:object="${vocabularyForm}">
+		<table class="table text-center mt-3">
+	
+			<tbody th:each="vocab : ${vocabList}">
+				<tr>
+					<td th:text="${vocab.word}"></td>
+					<td><input type="checkbox" th:field="${vocabularyForm.ok}" value="1">わかった</td>
+				</tr>
+
+			</tbody>
+			
+		</table>
+		<input type="submit" value="採点" class="btn btn-primary" >
+		<br><br>
+		<a th:href="@{/english}">トップページに戻る</a>
+		<br>
+		<img class="photo" src="/images/dictionary.png" alt="dictionary">
+	</div>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout}">
+<head>
+	<meta charset="UTF-8">
+	<title th:text="#{added}"></title>
+</head>
+<body>
+	<div layout:fragment="content">
+		<h1 th:text="#{added}" class="text-info"></h1>
+	
+		<h3 th:text="${addedWord}" class="text-danger"></h3>
+		<br><br>	
+	
+		<form method="post" th:action="@{/add}" th:object="${vocabularyForm}" class="text-center">
+			<div th:errors="*{word}" class="text-danger"></div>
+			
+			<h4>●単語帳●</h4>
+			<div >
+				<select name="bookId" class="form-control w-75" >
+					<option value="" selected>単語帳を選択して下さい。</option>
+					<option th:each="vocab : ${vocabularyBookList}" th:value="${vocab.id}" th:text="${vocab.name}"></option>
+				</select>
+			</div>
+			<br><br>
+			
+			<h4>●単語●</h4>
+			<input type="text" th:field="*{word}" class="form-control w-75" placeholder="単語を入力してください。">
+			<br><br>
+			
+			<h4>●意味●</h4>
+			<input type="text" th:field="*{definition}" class="form-control w-75" placeholder="意味を入力してください。">
+			<br><br>
+			
+			<input type="submit" value="追加" class="btn btn-primary" >
+		</form><br><br>
+		
+		<a class="btn btn-primary" th:href="@{/index}">アップロード</a>
+		<br><br>
+		<a th:href="@{/english}">トップページに戻る</a>
+		<br>
+		<img class="photo" src="/images/english_writing.png" alt="english_writing">
+	</div>
+</body>
+</html>

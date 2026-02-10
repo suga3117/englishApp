@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout}">
+<head>
+	<meta charset="UTF-8">
+	<title th:text="#{bookId}"></title>
+</head>
+<body>
+	<div layout:fragment="content">
+		
+		<h1 th:text="#{bookId}"></h1>
+		<br><br>
+		<h4 th:text="${areldyAdded}" class="text-danger"></h4>
+		<table class="table text-center mt-3">
+			
+			<thead>
+				<tr>
+					<td><h1>登録単語</h1></td>
+					<td><a th:href="@{'/subscribeBook/' + ${bookId}}" class="btn btn-primary">お気に入り</a></td>
+				</tr>
+				<tr>
+					<td><h5 th:text="#{word}"></h5></td>
+					<td><h5 th:text="#{definition}"></h5></td>
+				</tr>
+			</thead>
+			
+			<tbody th:each="vocab : ${vocabularyList}">
+				<tr>
+					<td th:text="${vocab.word}"></td>
+					<td th:text="${vocab.definition}"></td>
+				</tr>
+
+			</tbody>
+			
+		</table>
+		<a class="btn btn-primary" th:href="@{'/miniExam/' + ${bookId}}" th:text="#{exam}"></a>
+		<br><br>
+		<a th:href="@{/book}">みんなの単語帳へ</a>&nbsp;&nbsp;
+		<a th:href="@{/english}">トップページへ</a>
+		<br>
+		<img class="photo" src="/images/dictionary.png" alt="dictionary">
+	</div>
+</body>
+</html>

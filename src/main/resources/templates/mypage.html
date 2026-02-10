@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout}">
+<head>
+	<meta charset="UTF-8">
+	<title th:text="#{mypage}"></title>
+</head>
+<body>
+	<div layout:fragment="content">
+		
+		<h1 th:text="#{mypage}"></h1>
+		<br><br>
+		
+		<table class="table text-center mt-3">
+			
+			<thead>
+				<tr>
+					<td colspan="2"><h1>ログインユーザー</h1></td>
+				</tr>
+				<tr>
+					<td th:text="#{name}"></td>
+					<td th:text="${user.name}"></td>
+				</tr>
+				<tr>
+					<td th:text="#{email}"></td>
+					<td th:text="${user.email}"></td>
+				</tr>
+			</thead>
+	
+		</table>
+			<br><br>
+			
+		<table class="table text-center mt-3">
+			
+			<thead>
+				<tr>
+					<td colspan="3"><h1>登録単語</h1></td>
+				</tr>
+				<tr>
+					<td><h5 th:text="#{bookId}"></h5></td>
+					<td><h5 th:text="#{description }"></h5></td>
+					<td></td>
+				</tr>
+			</thead>
+			
+			<tbody th:each="vocab : ${vocabularyBookList}">
+				<tr>
+					<td th:text="${vocab.name}"></td>
+					<td th:text="${vocab.description}"></td>
+					<td><a th:href="@{'/eachVocabularyBook/' + ${vocab.id}}" class="btn btn-primary">選択</a></td>
+				</tr>
+
+			</tbody>
+			
+		</table>
+		
+		<br><br>
+			
+		<table class="table text-center mt-3">
+			
+			<thead>
+				<tr>
+					<td colspan="3"><h1>お気に入り単語帳</h1></td>
+				</tr>
+				<tr>
+					<td><h5 th:text="#{bookId}"></h5></td>
+					<td><h5 th:text="#{description }"></h5></td>
+					<td></td>
+				</tr>
+			</thead>
+			
+			<a class="btn btn-primary" th:href="@{/exam}" th:text="#{allVocabExam}"></a>
+		<br><br>
+			
+			<tbody th:if="${!subscribeBookList.isEmpty()}" th:each="subscribe : ${subscribeBookList}">
+				<tr>
+					<td th:text="${subscribe.vocabularyBook.name}"></td>
+					<td th:text="${subscribe.vocabularyBook.description}"></td>
+					<td><a th:href="@{'/eachBook/' + ${subscribe.bookId}}" class="btn btn-primary">選択</a></td>
+				</tr>
+			</tbody>
+			<tbody th:if="${subscribeBookList == null or subscribeBookList.isEmpty()}">
+				<tr>
+					<td th:text="${nonSubscribeBookList}"></td>
+					<td></td>
+					<td></td>
+				</tr>
+			</tbody>
+			
+		</table>
+		
+		<a th:href="@{/english}">トップページに戻る</a>
+		<br>
+		<img class="photo" src="/images/dictionary.png" alt="dictionary">
+	</div>
+</body>
+</html>

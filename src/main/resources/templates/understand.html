@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout}">
+
+<head>
+	<meta charset="UTF-8">
+	<title th:text="#{flashCard}"></title>
+</head>
+
+<body>
+	<div layout:fragment="content">
+		<h1 th:text="#{flashCard}"></h1>
+		<br><br>
+
+		<div th:object="${vocabularyForm}">
+			<h2 th:text="*{definition}"></h2>
+			<br><br>
+			
+			<div class="d-flex justify-content-center">
+				<div class="d-inline ">
+					<form method="post" th:action="@{/good}">
+						<input type="submit" value="わかった" class="btn btn-primary">
+						<p th:text="*{'わかった回数：' + card.good + '回'}"></p>
+						<input type="hidden" name="id" th:value="*{id}">
+						<input type="hidden" name="bookId" th:value="*{bookId}">
+					</form>
+				</div>
+							
+				<div class="d-inline ms-5">
+					<form method="post" th:action="@{/bad}">
+						<input type="submit" value="わからなかった" class="btn btn-primary">
+						<div class="misunderstand">
+							<p th:text="*{'わからなっかた回数：' + card.bad + '回'}"></p>
+						</div>
+						<input type="hidden" name="id" th:value="*{id}">
+						<input type="hidden" name="bookId" th:value="*{bookId}">
+					</form>
+				</div>
+			</div>
+			<br>
+			<a th:href="@{/english}">トップページに戻る</a>
+			<br>
+			<img class="photo" src="/images/anki_card.png" alt="anki_card">
+		</div>
+	</div>
+</body>
+
+</html>

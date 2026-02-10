@@ -1,0 +1,16 @@
+@charset "UTF-8";
+body {
+	background-color: burlywood !important;
+}
+.container{
+	
+}
+
+.misunderstand{
+	padding-left: 15px;
+}
+
+.photo{	
+	width: 20%;
+	height: auto;
+}

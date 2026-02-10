@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout}">
+<head>
+	<meta charset="UTF-8">
+	<title th:text="#{flashCard}"></title>
+</head>
+<body>
+	<div layout:fragment="content">
+		<h1 th:text="#{exam}"></h1>
+		<br><br>
+	
+		
+			<h2 th:text="*{exam}" class="bg-info d-inline-block"></h2>
+			<br><br>
+	
+			
+			<h3 th:text="${loginUserName + '様   ' + correctCount +'  問正解'}"> </h3>
+			
+			<br>
+			<a th:href="@{/english}">トップページに戻る</a>
+			<br>
+			<img class="photo" src="/images/anki_card.png" alt="anki_card">
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout}">
+<head>
+	<meta charset="UTF-8">
+	<title th:text="#{regist}"></title>
+</head>
+<body>
+	<div layout:fragment="content">
+		<h1 th:text="#{regist}"></h1>
+	
+		<form method="post" th:action="@{/regist}" th:object="${registUserForm}">
+			<h4>●名前●</h4><div th:errors="*{name}" class="text-danger"></div>
+			<input type="text" th:field="*{name}" class="form-control w-75" placeholder="名前を入力してください。">
+			<br>
+			
+			<h4>●email●</h4>
+			<div th:errors="*{email}" class="text-danger"></div>
+			<input type="text" th:field="*{email}" class="form-control w-75" placeholder="emailを入力してください。">
+			<br>
+			
+			<h4>●パスワード●</h4>
+			<div th:errors="*{password}" class="text-danger"></div>
+			<input type="text" th:field="*{password}" class="form-control w-75" placeholder="パスワードを入力してください。">
+			<br>
+			
+			<input type="submit" value="登録" class="btn btn-primary">
+			<br><br>
+		</form>
+		<a th:href="@{/english}">トップページに戻る</a>&nbsp;&nbsp;
+		<a sec:authorize="isAnonymous()" th:href="@{/login}">ログイン</a>
+	</div>
+</body>
+</html>

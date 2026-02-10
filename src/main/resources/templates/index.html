@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout}">
+<head>
+	<meta charset="UTF-8">
+	<title th:text="#{upload}"></title>
+</head>
+<body>
+	<div layout:fragment="content">
+		
+		<h1 th:text="#{upload}"></h1>
+		<br><br>
+		
+		<form th:action="@{/upload}" method="post" enctype="multipart/form-data">
+			<p><input type="file" name="file"></p>
+			<p><input type="submit" id="upload" value="ファイルをアップロード"></p>
+		</form>
+		<br><br>
+		
+		<a th:href="@{/english}">トップページに戻る</a>
+		<br>
+		<img class="photo" src="/images/dictionary.png" alt="dictionary">
+	</div>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout}">
+<head>
+	<meta charset="UTF-8">
+	<title th:text="#{dictionary}"></title>
+</head>
+<body>
+	<div layout:fragment="content">
+		<h1 th:text="#{dictionary}"></h1>
+		<br><br>
+	
+		<p th:text="${'単語:::   ' + words.word}"></p><br>
+		<p th:text="${'意味:::   ' + words.meanings[0].definitions[0].definition}"></p><br>
+		<p th:text="${'例文:::   ' + words.meanings[0].definitions[0].example}"></p><br>
+	
+		<figure>
+			<figcaption>発音確認:</figcaption>
+			<audio controls th:src="${words.phonetics[0].audio}"></audio>
+		</figure>
+		
+		<a th:href="@{/dictionary}">前の画面に戻る</a>&nbsp;&nbsp;
+		<a th:href="@{/english}">トップページに戻る</a>
+		<br>
+		<img class="photo" src="/images/dictionary.png" alt="dictionary">
+	</div>
+</body>
+</html>

@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTDMapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="katachi.spring.exercise.repository.VocabularyMapper">
+
+	<resultMap id="vocabulary" type="Vocabulary">
+		<result property="id" column="id"/>
+		<result property="bookId" column="book_id"/>
+		<result property="word" column="word"/>
+		<result property="userId" column="user_id"/>
+		<result property="definition" column="definition"/>
+		<association property="card" resultMap="card"/>	
+		<association property="vocabularyBook" resultMap="vocabularyBook"/>	
+		<association property="subscribeBook" resultMap="subscribeBook"/>	
+	</resultMap>
+	
+	<resultMap id="card" type="Card">
+		<result property="id" column="id"/>
+		<result property="good" column="good"/>	
+		<result property="bad" column="bad"/>	
+		<result property="userId" column="user_id"/>
+	</resultMap>
+	
+	<resultMap id="vocabularyBook" type="VocabularyBook">
+		<result property="id" column="id"/>
+		<result property="name" column="name"/>	
+	</resultMap>
+	
+	<resultMap id="subscribeBook" type="SubscribeBook">
+		<result property="id" column="id"/>
+		<result property="userId" column="user_id"/>	
+		<result property="bookId" column="book_id"/>
+		<result property="subscribeBook" column="subscribe_book"/>	
+	</resultMap>
+
+	
+	<insert id="add">
+		INSERT INTO vocabulary(
+			book_id
+			,word
+			,user_id
+			,definition
+		)
+		VALUES(
+			#{bookId}
+			,#{word}
+			,#{userId}
+			,#{definition}
+		)
+	</insert>
+		
+	<select id="getOne" resultMap="vocabulary">
+		SELECT
+			vocabulary.id
+			,vocabulary.book_id
+			,vocabulary.word
+			,vocabularyBook.name
+			,card.good
+			,card.bad
+			,vocabulary.user_id
+			,vocabulary.definition
+		FROM 
+			vocabulary
+		LEFT JOIN
+			card
+		ON
+			vocabulary.id = card.id
+		LEFT JOIN
+			vocabularyBook
+		ON
+			vocabulary.book_id = vocabularyBook.id
+		WHERE
+			vocabulary.user_id = #{userId}
+			AND vocabulary.book_id = #{bookId}
+		ORDER BY RAND()
+			LIMIT 1
+	</select>
+	
+	<select id="getOneForCheck" resultMap="vocabulary">
+		SELECT
+			vocabulary.id
+			,vocabulary.book_id
+			,vocabulary.word
+			,vocabularyBook.name
+			,vocabulary.user_id
+			,vocabulary.definition
+		FROM 
+			vocabulary
+		LEFT JOIN
+			vocabularyBook
+		ON
+			vocabulary.book_id = vocabularyBook.id
+		WHERE
+			vocabulary.user_id = #{userId}
+			AND vocabulary.book_id = #{bookId}
+	</select>
+	
+	<select id="getOnedefinition" resultMap="vocabulary">
+		SELECT
+			vocabulary.id
+			,vocabulary.book_id
+			,vocabulary.word
+			,card.good
+			,card.bad
+			,vocabulary.user_id
+			,vocabulary.definition
+		FROM 
+			vocabulary
+		LEFT JOIN
+			card
+		ON
+			vocabulary.id = card.id
+		WHERE
+			vocabulary.id = #{id}
+	</select>
+	
+	<select id="count">
+		SELECT
+			count(word)
+		FROM
+			vocabulary
+		WHERE
+			word =#{word}
+			AND user_id = #{userId}
+	</select>
+	
+	<select id="getAll">
+		SELECT
+			id
+			,book_id
+			,word
+			,user_id
+			,definition
+		FROM 
+			vocabulary
+		WHERE
+			vocabulary.user_id = #{userId}
+	</select>
+	
+	<select id="getVocabsForExam">
+		SELECT
+			id
+			,book_id
+			,word
+			,user_id
+			,definition
+		FROM 
+			vocabulary
+		WHERE
+			vocabulary.user_id = #{userId}
+		ORDER BY RAND()
+		LIMIT 3
+	</select>
+	
+	<select id="getVocabsForMiniExam">
+		SELECT
+			id
+			,book_id
+			,word
+			,user_id
+			,definition
+		FROM 
+			vocabulary
+		WHERE
+			user_id = #{userId}
+			AND book_id = #{bookId}
+		ORDER BY RAND()
+		LIMIT 3
+	</select>
+	
+	<select id="getOneBookForCheck" resultMap="vocabulary">
+		SELECT
+			vocabulary.id
+			,vocabulary.book_id
+			,vocabulary.word
+			,vocabularyBook.name
+			,vocabulary.user_id
+			,vocabulary.definition
+		FROM 
+			vocabulary
+		LEFT JOIN
+			vocabularyBook
+		ON
+			vocabulary.book_id = vocabularyBook.id
+		WHERE
+			vocabulary.book_id = #{bookId}
+	</select>
+	
+	
+	<select id="subscribeBookForMiniExam" resultMap="vocabulary">
+		SELECT
+			vocabulary.id
+			,vocabulary.book_id
+			,vocabulary.word
+			,vocabulary.user_id
+			,vocabulary.definition
+			,subscribeBook.user_id
+			,subscribeBook.book_id
+		FROM 
+			vocabulary
+		LEFT JOIN
+			subscribeBook
+		ON
+			vocabulary.book_id = subscribeBook.book_id
+		WHERE
+			subscribeBook.user_id = #{userId}
+			AND subscribeBook.book_id = #{bookId}
+		ORDER BY RAND()
+		LIMIT 3
+	</select>
+	
+	
+</mapper>

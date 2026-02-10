@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout}">
+<head>
+	<meta charset="UTF-8">
+	<title th:text="#{dictionary}"></title>
+</head>
+<body>
+	<div layout:fragment="content">
+		<h1 th:text="#{dictionary}" class="text-success"></h1>
+		<br><br>
+	
+		<form method="post" th:action="@{/search}" th:object="${vocabularyForm}">
+			<div th:errors="*{word}" class="text-danger"></div>
+			<input type="text" th:field="*{word}" class="form-control w-75" placeholder="単語を入力してください。">
+			<br>
+			<input type="submit" value="検索" class="btn btn-primary" >
+			<br><br>
+		</form>
+		<a th:href="@{/english}">トップページに戻る</a>
+		<br>
+		<img class="photo" src="/images/dictionary.png" alt="dictionary">
+	</div>
+</body>
+</html>
