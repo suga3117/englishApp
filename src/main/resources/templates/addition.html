@@ -7,17 +7,18 @@
 </head>
 <body>
 	<div layout:fragment="content">
-		<h1 th:text="#{added}" class="text-info"></h1>
+		<h1 th:text="#{added}" class="top-title"></h1>
 	
-		<h3 th:text="${addedWord}" class="text-danger"></h3>
+		<h3 th:text="${addedWord}" class="errorMessage"></h3>
 		<br><br>	
 	
-		<form method="post" th:action="@{/add}" th:object="${vocabularyForm}" class="text-center">
-			<div th:errors="*{word}" class="text-danger"></div>
+		<form method="post" th:action="@{/add}" th:object="${vocabularyForm}" class="container">
+			<div th:errors="*{word}" class="errorMessage"></div>
+			<div th:errors="*{definition}" class="errorMessage"></div>
 			
 			<h4>●単語帳●</h4>
 			<div >
-				<select name="bookId" class="form-control w-75" >
+				<select name="bookId" class="form" >
 					<option value="" selected>単語帳を選択して下さい。</option>
 					<option th:each="vocab : ${vocabularyBookList}" th:value="${vocab.id}" th:text="${vocab.name}"></option>
 				</select>
@@ -25,11 +26,11 @@
 			<br><br>
 			
 			<h4>●単語●</h4>
-			<input type="text" th:field="*{word}" class="form-control w-75" placeholder="単語を入力してください。">
+			<input type="text" th:field="*{word}" class="form" th:placeholder="#{enterWord}">
 			<br><br>
 			
 			<h4>●意味●</h4>
-			<input type="text" th:field="*{definition}" class="form-control w-75" placeholder="意味を入力してください。">
+			<input type="text" th:field="*{definition}" class="form" th:placeholder="#{enterMeaning}">
 			<br><br>
 			
 			<input type="submit" value="追加" class="btn btn-primary" >
@@ -37,7 +38,7 @@
 		
 		<a class="btn btn-primary" th:href="@{/index}">アップロード</a>
 		<br><br>
-		<a th:href="@{/english}">トップページに戻る</a>
+		<a th:href="@{/english}" th:text="#{toTopPage}"></a>
 		<br>
 		<img class="photo" src="/images/english_writing.png" alt="english_writing">
 	</div>

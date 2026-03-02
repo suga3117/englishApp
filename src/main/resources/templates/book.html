@@ -11,7 +11,7 @@
 		<h1 th:text="#{vocabularyBookForEveryone}"></h1>
 		<br><br>
 
-		<table class="table text-center mt-3">
+		<table class="mainTable">
 			
 			<thead>
 				<tr>
@@ -30,14 +30,14 @@
 					<td th:text="${book.userName + '〇様'}"></td>
 					<td th:text="${book.name}"></td>
 					<td th:text="${book.description}"></td>
-					<td><a th:href="@{'/eachBook/' + ${book.id}}" class="btn btn-primary">選択</a></td>
+					<td><a th:href="@{'/eachBook/' + ${book.id}}" class="btn btn-primary" th:text="#{choice}"></a></td>
 				</tr>
 
 			</tbody>
 			
 		</table>
 
-		<a th:href="@{/english}">トップページに戻る</a>
+		<a th:href="@{/english}" th:text="#{toTopPage}"></a>
 		<br>
 		<img class="photo" src="/images/dictionary.png" alt="dictionary">
 	</div>

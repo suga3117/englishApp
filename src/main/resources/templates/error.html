@@ -8,9 +8,9 @@
 <body>
 	
 	<br>
-	<h3 th:text="#{errorMessage}" class="text-danger"></h3><br><br>
+	<h3 th:text="#{errorMessage}" class="errorMessage"></h3><br><br>
 	
-	<a th:href="@{/english}">トップページに戻る</a>
+	<a th:href="@{/english}" th:text="#{toTopPage}"></a>
 	
 </body>
 </html>

@@ -15,6 +15,6 @@ public class Users {
 	
 	
 	
-	private String userName;
+
 
 }

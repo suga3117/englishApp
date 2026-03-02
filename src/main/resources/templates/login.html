@@ -9,21 +9,24 @@
 		<h1 th:text="#{login}"></h1>
 	
 		<form method="post" th:action="@{/login}" th:object="${loginUserForm}">
+			
+			<h5 th:if="${param.error}" th:text="#{loginError}" class="errorMessage"></h5>
+
 			<h4>●email●</h4>
-			<div th:errors="*{email}" class="text-danger"></div>
-			<input type="text" th:field="*{email}" class="form-control w-75" placeholder="emailを入力してください。">
+			<div th:errors="*{email}" class="errorMessage"></div>
+			<input type="text" th:field="*{email}" class="form" th:placeholder="#{enterEmail}" required>
 			<br>
 			
 			<h4>●パスワード●</h4>
-			<div th:errors="*{password}" class="text-danger"></div>
-			<input type="text" th:field="*{password}" class="form-control w-75" placeholder="パスワードを入力してください。">
+			<div th:errors="*{password}" class="errorMessage"></div>
+			<input type="password" th:field="*{password}" class="form" th:placeholder="#{enterPassword}" required>
 			<br>
 			
 			<input type="submit" value="ログイン" class="btn btn-primary" >
 			<br><br>
 		</form>
-		<a th:href="@{/english}">トップページに戻る</a>
-		<a sec:authorize="isAnonymous()" th:href="@{/regist}" class="button-spacing">新規登録</a>
+		<a th:href="@{/english}" th:text="#{toTopPage}"></a>
+		<a sec:authorize="isAnonymous()" th:href="@{/regist}" class="button-spacing" th:text="#{newRegist}"></a>
 	</div>
 </body>
 </html>

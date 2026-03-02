@@ -15,8 +15,8 @@
 			
 			<thead>
 				<tr>
-					<td><h1>登録単語</h1></td>
-					<td><a th:href="@{'/subscribeBook/' + ${bookId}}" class="btn btn-primary">お気に入り</a></td>
+					<td><h1 th:text="#{savedWords}"></h1></td>
+					<td><a th:href="@{'/subscribeBook/' + ${bookId}}" class="btn btn-primary" th:text="#{farvorite}"></a></td>
 				</tr>
 				<tr>
 					<td><h5 th:text="#{word}"></h5></td>
@@ -35,8 +35,8 @@
 		</table>
 		<a class="btn btn-primary" th:href="@{'/miniExam/' + ${bookId}}" th:text="#{exam}"></a>
 		<br><br>
-		<a th:href="@{/mypage}">マイページへ</a>&nbsp;&nbsp;
-		<a th:href="@{/english}">トップページへ</a>
+		<a th:href="@{/mypage}" th:text="#{toMypage}"></a>&nbsp;&nbsp;
+		<a th:href="@{/english}" th:text="#{toTopPage}"></a>
 		<br>
 		<img class="photo" src="/images/dictionary.png" alt="dictionary">
 	</div>

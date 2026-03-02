@@ -11,13 +11,20 @@
 		<h1 th:text="#{upload}"></h1>
 		<br><br>
 		
-		<form th:action="@{/upload}" method="post" enctype="multipart/form-data">
+		<form th:action="@{/upload}" method="post" enctype="multipart/form-data" th:object="${vocabularyForm}">
+			<h4>●単語帳●</h4>
+			<div >
+				<select name="bookId" class="form" >
+					<option value="" selected>単語帳を選択して下さい。</option>
+					<option th:each="vocab : ${vocabularyBookList}" th:value="${vocab.id}" th:text="${vocab.name}"></option>
+				</select>
+			</div>
 			<p><input type="file" name="file"></p>
 			<p><input type="submit" id="upload" value="ファイルをアップロード"></p>
 		</form>
 		<br><br>
 		
-		<a th:href="@{/english}">トップページに戻る</a>
+		<a th:href="@{/english}" th:text="#{toTopPage}"></a>
 		<br>
 		<img class="photo" src="/images/dictionary.png" alt="dictionary">
 	</div>

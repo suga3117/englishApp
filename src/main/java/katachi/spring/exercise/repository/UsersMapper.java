@@ -7,10 +7,10 @@ import katachi.spring.exercise.domain.Users;
 @Mapper
 public interface UsersMapper {
 	
-	public Users regist(Users users);
+	public Integer regist(Users users);
 	
 	public Users getUser(String email);
 	
-	public int count(String email);
+	public Integer count(String email);
 
 }

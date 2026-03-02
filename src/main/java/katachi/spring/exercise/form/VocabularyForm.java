@@ -23,6 +23,8 @@ public class VocabularyForm {
 	private String word;
 	private Integer good;
 	private Integer bad;
+	
+	@NotBlank(message="{definition.NotBlank}", groups=ValidGroup1.class)
 	private String definition;
 	
 	private String name;

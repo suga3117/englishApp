@@ -19,8 +19,8 @@
 			<audio controls th:src="${words.phonetics[0].audio}"></audio>
 		</figure>
 		
-		<a th:href="@{/dictionary}">前の画面に戻る</a>&nbsp;&nbsp;
-		<a th:href="@{/english}">トップページに戻る</a>
+		<a th:href="@{/dictionary}" th:text="#{toPreviousPage}"></a>&nbsp;&nbsp;
+		<a th:href="@{/english}" th:text="#{toTopPage}"></a>
 		<br>
 		<img class="photo" src="/images/dictionary.png" alt="dictionary">
 	</div>

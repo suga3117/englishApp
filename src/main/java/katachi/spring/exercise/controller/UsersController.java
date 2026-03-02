@@ -62,14 +62,17 @@ public class UsersController {
 			
 			return "regist";
 			
-		} else if(usersService.count(form.getEmail()) >= 1) {
+		} else if(usersService.count(form.getEmail()) != null && usersService.count(form.getEmail()) >= 1) {
 			
 			model.addAttribute("email", "既に登録されています。");
 			
 			return "regist";
-		}
+			}
 		
 		Users users = modelMapper.map(form, Users.class);
+		
+		System.out.println("Users: " + users);
+		
 		usersService.regist(users);
 		model.addAttribute("newMember", "ユーザー登録しました。");
 	
@@ -82,28 +85,10 @@ public class UsersController {
 		return "login";
 	}
 	
-	@PostMapping("/login")
-	public String PostLogin(Model model, @AuthenticationPrincipal LoginUser loginUser, @Validated LoginUserForm form, BindingResult result) {
-		
-		if (result.hasErrors()) {
-			
-			return "login";
-		}
-		
-		usersService.getUser(form.getEmail());
-		model.addAttribute("logedIn", "ログインしました。");
-	
-		return "english";
-	}
-	
 	@GetMapping("/mypage")
 	public String getMypage(Model model,@AuthenticationPrincipal LoginUser loginUser) {
 		model.addAttribute("user", usersService.getUser(loginUser.getUsername()));
 		model.addAttribute("vocabularyBookList", vocabularyBookService.getAll(loginUser.getId()));
-		
-		
-		
-
 		
 		if(subscribeBookService.getMine(loginUser.getId()).isEmpty()){
 			model.addAttribute("nonSubscribeBookList", "お気に入りはありません。");

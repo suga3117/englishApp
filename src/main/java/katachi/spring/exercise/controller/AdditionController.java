@@ -73,9 +73,7 @@ public class AdditionController {
 			return "addition";
 
 		}
-			
-			
-		
+	
 		vocabularyService.add(form.getWord(), loginUser.getId(), form.getDefinition(), form.getBookId());
 		cardService.add(loginUser.getId());
 		additionService.add(loginUser.getId());
@@ -85,13 +83,15 @@ public class AdditionController {
 	}
 	
 	@GetMapping("/index")
-	public String getIndex(Model model, VocabularyForm form) {		
+	public String getIndex(Model model, VocabularyForm form, @AuthenticationPrincipal LoginUser loginUser) {		
+		
+		model.addAttribute("vocabularyBookList", vocabularyBookService.getAll(loginUser.getId()));
 	
 		return "index";
 	}
 	
 	@PostMapping("/upload")
-	public String upload(@RequestParam MultipartFile file, @AuthenticationPrincipal LoginUser loginUser) throws IOException {
+	public String upload(@RequestParam MultipartFile file, VocabularyForm form, @AuthenticationPrincipal LoginUser loginUser) throws IOException {
 		String uploadDir = "csv/";
 		Path path = Paths.get(uploadDir + file.getOriginalFilename());
 		Files.createDirectories(path.getParent());
@@ -101,13 +101,14 @@ public class AdditionController {
 		try (BufferedReader br = new BufferedReader(new FileReader(f))) {
 			
 			String line;
-			// vocabularyService.add(data[0], loginUser.getId(), data[1]);
-			
+						
 			while ((line = br.readLine()) != null) {
 				System.out.println("Line: " + line);
 				String[] data = line.split(","); // 行をカンマ区切りで配列に変換
 
-				//vocabularyService.add(data[0], loginUser.getId(), data[1]);
+				vocabularyService.add(data[0], loginUser.getId(), data[1], form.getBookId());
+				cardService.add(loginUser.getId());
+				additionService.add(loginUser.getId());
 			}
 		}
 		return "uploadResult";

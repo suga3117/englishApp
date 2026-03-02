@@ -39,7 +39,7 @@ public class CardController {
 	public String getCard(Model model, VocabularyForm form, @AuthenticationPrincipal LoginUser loginUser) {
 		System.out.println(loginUser.getId() + " " +form.getBookId());
 		Vocabulary vocab =  vocabularyService.getOne(loginUser.getId(), form.getBookId());
-		
+
 		model.addAttribute("vocabularyForm", vocab);
 	
 		return "card";

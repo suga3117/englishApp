@@ -13,11 +13,11 @@
 		<br><br>
 
 		<div th:object="${vocabularyForm}">
-			<h2 th:text="*{definition}"></h2>
+			<h2 th:text="*{definition}" class="checkCardWord"></h2>
 			<br><br>
 			
-			<div class="d-flex justify-content-center">
-				<div class="d-inline ">
+			<div class="containtForFlashCard">
+				<div class="flashCardInside ">
 					<form method="post" th:action="@{/good}">
 						<input type="submit" value="わかった" class="btn btn-primary">
 						<p th:text="*{'わかった回数：' + card.good + '回'}"></p>
@@ -26,7 +26,7 @@
 					</form>
 				</div>
 							
-				<div class="d-inline ms-5">
+				<div class="flashCardInside">
 					<form method="post" th:action="@{/bad}">
 						<input type="submit" value="わからなかった" class="btn btn-primary">
 						<div class="misunderstand">
@@ -38,7 +38,7 @@
 				</div>
 			</div>
 			<br>
-			<a th:href="@{/english}">トップページに戻る</a>
+			<a th:href="@{/english}" th:text="#{toTopPage}"></a>
 			<br>
 			<img class="photo" src="/images/anki_card.png" alt="anki_card">
 		</div>

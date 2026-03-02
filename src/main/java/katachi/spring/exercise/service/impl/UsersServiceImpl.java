@@ -18,7 +18,7 @@ public class UsersServiceImpl implements UsersService{
 	private PasswordEncoder encoder;
 	
 	@Override
-	public Users regist(Users users) {
+	public Integer regist(Users users) {
 		String rawPassword = users.getPassword();
 		users.setPassword(encoder.encode(rawPassword));
 		return usersMapper.regist(users);
@@ -31,7 +31,7 @@ public class UsersServiceImpl implements UsersService{
 	}
 	
 	@Override
-	public int count(String email) {
+	public Integer count(String email) {
 		return usersMapper.count(email);
 	}
 

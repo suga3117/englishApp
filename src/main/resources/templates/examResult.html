@@ -18,7 +18,7 @@
 			<h3 th:text="${loginUserName + '様   ' + correctCount +'  問正解'}"> </h3>
 			
 			<br>
-			<a th:href="@{/english}">トップページに戻る</a>
+			<a th:href="@{/english}" th:text="#{toTopPage}"></a>
 			<br>
 			<img class="photo" src="/images/anki_card.png" alt="anki_card">
 		</div>

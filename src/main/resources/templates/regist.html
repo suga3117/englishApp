@@ -9,25 +9,25 @@
 		<h1 th:text="#{regist}"></h1>
 	
 		<form method="post" th:action="@{/regist}" th:object="${registUserForm}">
-			<h4>●名前●</h4><div th:errors="*{name}" class="text-danger"></div>
-			<input type="text" th:field="*{name}" class="form-control w-75" placeholder="名前を入力してください。">
+			<h4>●名前●</h4><div th:errors="*{name}" class="errorMessage"></div>
+			<input type="text" th:field="*{name}" class="form" th:placeholder="#{enterName}">
 			<br>
 			
 			<h4>●email●</h4>
-			<div th:errors="*{email}" class="text-danger"></div>
-			<input type="text" th:field="*{email}" class="form-control w-75" placeholder="emailを入力してください。">
+			<div th:errors="*{email}" class="errorMessage"></div>
+			<input type="text" th:field="*{email}" class="form" th:placeholder="#{enterEmail}">
 			<br>
 			
 			<h4>●パスワード●</h4>
-			<div th:errors="*{password}" class="text-danger"></div>
-			<input type="text" th:field="*{password}" class="form-control w-75" placeholder="パスワードを入力してください。">
+			<div th:errors="*{password}" class="errorMessage"></div>
+			<input type="password" th:field="*{password}" class="form" th:placeholder="#{enterPassword}">
 			<br>
 			
 			<input type="submit" value="登録" class="btn btn-primary">
 			<br><br>
 		</form>
-		<a th:href="@{/english}">トップページに戻る</a>&nbsp;&nbsp;
-		<a sec:authorize="isAnonymous()" th:href="@{/login}">ログイン</a>
+		<a th:href="@{/english}" th:text="#{toTopPage}"></a>&nbsp;&nbsp;
+		<a sec:authorize="isAnonymous()" th:href="@{/login}" th:text="#{login}"></a>
 	</div>
 </body>
 </html>

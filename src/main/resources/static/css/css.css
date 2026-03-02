@@ -3,7 +3,8 @@ body {
 	background-color: burlywood !important;
 }
 .container{
-	
+	text-align: center;
+	padding-top: 10px;
 }
 
 .misunderstand{
@@ -13,4 +14,72 @@ body {
 .photo{	
 	width: 20%;
 	height: auto;
+}
+
+.top-buttons{
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	justify-content: flex-end;
+}
+.top-title {
+	color: aqua;
+}
+
+.errorMessage {
+	color: red
+}
+
+.form {
+	width: 700px;
+	height: 40px;
+	margin-bottom: 10px;
+}
+
+.checkCardWord{
+	background-color: aqua;
+	display: inline-block;
+}
+
+.containtForFlashCard {
+	display: flex;
+	justify-content: center
+}
+
+.flashCardInside {
+	display: inline;
+}
+
+.mainTable {
+	width: 100%;
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+	border-collapse: collapse;
+	text-align: center; 
+	
+
+}
+
+.mainTable tr {
+	border-bottom: 1px solid white;
+}
+
+.mainTable td {
+	padding: 0.8rem 0;
+}
+
+.pageList {
+	width: 100%;
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+	border-collapse: collapse;
+	text-align: center; 
+}
+
+.pageList tr {
+	border-bottom: 1px solid white;
+}
+
+.pageList td {
+	padding: 0.8rem 0;
 }

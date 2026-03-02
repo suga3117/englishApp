@@ -11,7 +11,7 @@
 		<h1 th:text="#{mypage}"></h1>
 		<br><br>
 		
-		<table class="table text-center mt-3">
+		<table class="pageList">
 			
 			<thead>
 				<tr>
@@ -30,7 +30,7 @@
 		</table>
 			<br><br>
 			
-		<table class="table text-center mt-3">
+		<table class="pageList">
 			
 			<thead>
 				<tr>
@@ -56,7 +56,7 @@
 		
 		<br><br>
 			
-		<table class="table text-center mt-3">
+		<table class="pageList">
 			
 			<thead>
 				<tr>
@@ -76,7 +76,7 @@
 				<tr>
 					<td th:text="${subscribe.vocabularyBook.name}"></td>
 					<td th:text="${subscribe.vocabularyBook.description}"></td>
-					<td><a th:href="@{'/eachBook/' + ${subscribe.bookId}}" class="btn btn-primary">選択</a></td>
+					<td><a th:href="@{'/eachBook/' + ${subscribe.bookId}}" class="btn btn-primary" th:text="#{choice}"></a></td>
 				</tr>
 			</tbody>
 			<tbody th:if="${subscribeBookList == null or subscribeBookList.isEmpty()}">
@@ -89,7 +89,7 @@
 			
 		</table>
 		
-		<a th:href="@{/english}">トップページに戻る</a>
+		<a th:href="@{/english}" th:text="#{toTopPage}"></a>
 		<br>
 		<img class="photo" src="/images/dictionary.png" alt="dictionary">
 	</div>
