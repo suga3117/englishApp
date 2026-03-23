@@ -27,9 +27,6 @@
 
 DB
 ・MySQL
-
-view
-
 ・Thymeleaf,HTML
 ・css/Bootstrap
 
@@ -38,6 +35,7 @@ view
 
 
 ●実装機能
+
 〇ログアウト時
 ・辞書機能
 ・ログイン機能
